@@ -127,6 +127,45 @@ st.markdown(
         color: #333333;
         border-radius: 8px;
     }
+    /* 전체 multiselect 선택 박스 영역 */
+    div[data-baseweb="select"] {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    /* 선택된 항목 박스 스타일 (배경색/테두리/글자색) */
+    div[data-baseweb="tag"] {
+        background-color: #67ca5d !important;
+        border: 1px solid #67ca5d !important;
+        border-radius: 6px !important;
+        padding: 4px 10px !important;
+        font-weight: 500 !important;
+        color: white !important;
+        max-width: 100% !important;
+        white-space: nowrap !important;
+    }
+
+    /* 선택 항목 내부의 텍스트가 잘리지 않도록 내부 div들 제한 해제 */
+    div[data-baseweb="tag"] > div {
+        max-width: none !important;
+        overflow: visible !important;
+        text-overflow: unset !important;
+        white-space: nowrap !important;
+    }
+
+    /* 선택된 항목 안에 있는 텍스트 span 태그에도 적용 */
+    div[data-baseweb="tag"] span {
+        white-space: nowrap !important;
+        overflow: visible !important;
+        text-overflow: unset !important;
+        display: inline !important;
+    }
+
+    /* 전체 선택박스 외곽 테두리 색상 변경 */
+    div[data-baseweb="select"] > div {
+        border: 1px solid #67ca5d !important;
+        border-radius: 6px !important;
+    }
     </style>
     """,
     unsafe_allow_html=True
@@ -433,16 +472,17 @@ if st.session_state.page == "input":
         horizontal=True
     )
     
-    # 4 해지 강도 선택 (라디오 버튼 방식)
+    # 4 강조 포인트(topping)
     selected_points = st.multiselect(
         "📌 강조할 포인트(선택한 내용이 스크립트에 반영됩니다)",
-        [
-            "굿리치 보험사의 장점",
-            "통합분석서비스",
-            "가입할 당시 상황 다시 리마인드",
-            "전담컨서턴트 관리시스템",
-            "가족보험관리 서비스제공"
-        ]
+        options = [
+            "굿리치의 신뢰도와 브랜드 공신력 강조",
+            "타사 설계와의 비교 설명",
+            "가입 당시 상황 다시 리마인드",
+            "전담컨설턴트 관리시스템 강조",
+            "가족보험관리 서비스 강조"
+        ],
+        default=[],
     )
     st.caption("")
 
